@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1A6kNQBuTxN0m12ofhFYfGXktmt7XcMxu">
+<title>Ramneet - Game Designer & Developer</title>
+
+<style>
+:root{
+  --bg-primary: #211832;
+  --bg-secondary: #412B6B;
+  --text-primary: #ffffff;
+  --text-secondary: #c4b5d8;
+  --accent-1: #5C3E94;
+  --accent-2: #F25912;
+  --accent-3: #8c6bb1;
+  --accent-4: #F25912;
+  --card-bg: rgba(65, 43, 107, 0.8);
+  --glow: rgba(92, 62, 148, 0.4);
+}
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+body{
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #211832 0%, #412B6B 50%, #211832 100%);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.6;
+  position: relative;
+}
+
+/* Animated Background */
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-1), transparent);
+  opacity: 0.15;
+  animation: float 20s infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-100px) translateX(50px); }
+  50% { transform: translateY(-50px) translateX(-50px); }
+  75% { transform: translateY(-150px) translateX(100px); }
+}
+
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(33, 24, 50, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 20px 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(92, 62, 148, 0.2);
+  transform: translateY(-100%);
+  animation: slideDown 0.6s ease forwards 0.2s;
+}
+
+@keyframes slideDown {
+  to { transform: translateY(0); }
+}
+
+nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-3));
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--text-primary);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 80px;
+  position: relative;
+}
+
+.hero-content {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards 0.3s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 800;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #5C3E94 0%, #F25912 50%, #8c6bb1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient 8s ease infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.hero .subtitle {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+  font-weight: 300;
+}
+
+.hero .tagline {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.8;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.btn {
+  padding: 14px 32px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  color: white;
+  box-shadow: 0 10px 30px rgba(92, 62, 148, 0.3);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(92, 62, 148, 0.5);
+}
+
+.btn-secondary {
+  border: 2px solid var(--accent-1);
+  color: var(--accent-1);
+  background: transparent;
+}
+
+.btn-secondary:hover {
+  background: var(--accent-1);
+  color: white;
+  transform: translateY(-3px);
+}
+
+.social-links {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.social-links a {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 1px solid rgba(92, 62, 148, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-2);
+  text-decoration: none;
+  font-size: 1.3rem;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background: var(--accent-2);
+  color: white;
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 10px 25px rgba(242, 89, 18, 0.4);
+}
+
+/* Section Styling */
+section {
+  padding: 100px 0;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-3));
+  border-radius: 2px;
+}
+
+/* Projects Grid */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.project-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(92, 62, 148, 0.2);
+  transition: all 0.4s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(92, 62, 148, 0.15), rgba(242, 89, 18, 0.1));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--accent-1);
+  box-shadow: 0 20px 60px rgba(92, 62, 148, 0.3);
+}
+
+.project-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.project-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--text-primary);
+  position: relative;
+  z-index: 1;
+}
+
+.project-card p {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.tech-tag {
+  background: rgba(92, 62, 148, 0.2);
+  color: var(--accent-2);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid rgba(92, 62, 148, 0.4);
+}
+
+.project-links {
+  margin-top: auto;
+  padding-top: 20px;
+  display: flex;
+  gap: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.project-links a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.project-links a:hover {
+  color: var(--accent-2);
+  transform: translateX(5px);
+}
+
+/* Skills Section */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.skill-category {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(92, 62, 148, 0.2);
+  transition: all 0.3s ease;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-category:hover {
+  border-color: var(--accent-1);
+  transform: translateY(-5px);
+}
+
+.skill-category h3 {
+  font-size: 1.3rem;
+  margin-bottom: 25px;
+  color: var(--accent-2);
+}
+
+.skill-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  flex: 1;
+  align-content: start;
+}
+
+.skill-list span {
+  background: rgba(92, 62, 148, 0.2);
+  color: var(--text-secondary);
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  border: 1px solid rgba(92, 62, 148, 0.3);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.skill-list span:hover {
+  background: rgba(92, 62, 148, 0.35);
+  color: var(--text-primary);
+  border-color: var(--accent-2);
+  transform: translateY(-2px);
+}
+
+/* Contact Links */
+.contact-link {
+  background: rgba(92, 62, 148, 0.2);
+  color: var(--text-secondary);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  border: 1px solid rgba(92, 62, 148, 0.3);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-link:hover {
+  background: rgba(92, 62, 148, 0.35);
+  color: var(--text-primary);
+  border-color: var(--accent-2);
+  transform: translateY(-2px);
+}
+
+/* About Section */
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-content p {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--text-secondary);
+  border-top: 1px solid rgba(92, 62, 148, 0.2);
+  margin-top: 100px;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+  40% { transform: translateX(-50%) translateY(-10px); }
+  60% { transform: translateX(-50%) translateY(-5px); }
+}
+
+.scroll-indicator span {
+  display: block;
+  width: 30px;
+  height: 50px;
+  border: 2px solid var(--accent-1);
+  border-radius: 25px;
+  position: relative;
+}
+
+.scroll-indicator span::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--accent-1);
+  border-radius: 50%;
+  animation: scroll 2s infinite;
+}
+
+@keyframes scroll {
+  0% { opacity: 1; top: 10px; }
+  100% { opacity: 0; top: 30px; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hero h1 { font-size: 2.5rem; }
+  .projects { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .skill-list { grid-template-columns: 1fr; }
+  h2 { font-size: 2rem; }
+}
+</style>
+</head>
+
+<body>
+<!-- Animated Background Particles -->
+<div id="particles"></div>
+
+<!-- Navigation -->
+<nav>
+  <div class="container">
+    <div class="logo">
+      <img src="https://lh3.googleusercontent.com/d/1A6kNQBuTxN0m12ofhFYfGXktmt7XcMxu" alt="Logo" style="height: 40px; border-radius: 25%;">
+      <span>Ramneet's Portfolio</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Ramneet</h1>
+    <p class="subtitle">Game Designer & Developer</p>
+    <p class="tagline">
+      Computer Science student specializing in game design • Crafting engaging experiences through innovative mechanics and compelling systems
+    </p>
+    
+    <div class="cta-buttons">
+      <a href="#projects" class="btn btn-primary">View My Work</a>
+      <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span></span>
+  </div>
+</section>
+
+<div class="container">
+
+<!-- Projects Section -->
+<section id="projects">
+  <h2>Featured Projects</h2>
+  <div class="projects">
+    
+    <div class="project-card">
+      <h3>Turbo Slick</h3>
+      <p>Strategic racing board game for 2-6 players combining Mario Kart-style racing with tactical depth. Features unique racer abilities, item management, drafting mechanics, and secret sponsor objectives across a 100-space loop track.</p>
+      <div class="tech-stack">
+        <span class="tech-tag">Board Game Design</span>
+        <span class="tech-tag">Systems Design</span>
+        <span class="tech-tag">Game Balancing</span>
+      </div>
+      <div class="project-links">
+        <a href="https://drive.google.com/file/d/1LSVeJybEq7iFdT78Bku3Ewcbq5cDA8OS/view?usp=sharing" target="_blank">View Rulebook →</a>
+        <a href="https://drive.google.com/file/d/1us_uSiOfSm9HfbWLYPJRZtke1CpLp5S-/view?usp=sharing" target="_blank">View GDD →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <h3>Listen</h3>
+      <p>First-person stealth horror where sound is both vision and danger. Players emit sound pulses to reveal the environment and enemies, but noise alerts threats. No combat, instant death, pure skill-based survival through sound management and spatial awareness.</p>
+      <div class="tech-stack">
+        <span class="tech-tag">Unity</span>
+        <span class="tech-tag">C#</span>
+        <span class="tech-tag">Horror</span>
+      </div>
+      <div class="project-links">
+        <a href="https://drive.google.com/file/d/1-J3-KqlrW1B9k5Itfr2thRIwl6VJhKXd/view?usp=sharing" target="_blank">View GDD →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <h3>Flag Frenzy</h3>
+      <p>Hybrid physical sport combining capture-the-flag with dodgeball mechanics. Features role-based strategy (attackers, defenders, supporters), freeze mechanics, safe zones, and multiple game modes for 8-20 players. Designed for competitive outdoor/gym play.</p>
+      <div class="tech-stack">
+        <span class="tech-tag">Physical Game Design</span>
+        <span class="tech-tag">Team Strategy</span>
+        <span class="tech-tag">Sports Mechanics</span>
+      </div>
+      <div class="project-links">
+        <a href="https://drive.google.com/file/d/1Y4ZHbrNtij-vCqozc-68Bcf7R8rT3XEE/view?usp=sharing" target="_blank">View Rules →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <h3>Echo Jumper</h3>
+      <p>Atmospheric 2D platformer set in total darkness where players use sonar-like "pings" to reveal the environment. Features dynamic jump mechanics, high-precision physics, and tension between known and unknown spaces through limited-duration object revelation.</p>
+      <div class="tech-stack">
+        <span class="tech-tag">Unity</span>
+        <span class="tech-tag">C#</span>
+        <span class="tech-tag">2D Physics</span>
+      </div>
+      <div class="project-links">
+        <a href="#">Play Demo →</a>
+        <a href="https://drive.google.com/file/d/1CUpmcUKzam3JgY8ueksoqqhcsj5yqHPY/view?usp=sharing" target="_blank">View GDD →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <h3>3D Assets Collection</h3>
+      <p>Curated collection of 3D models and assets including environments and game-ready props. Features optimized meshes, PBR materials, and production-ready assets for various game genres.</p>
+      <div class="tech-stack">
+        <span class="tech-tag">3D Modeling</span>
+        <span class="tech-tag">Asset Creation</span>
+      </div>
+      <div class="project-links">
+        <a href="#" target="_blank">View Assets →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skills-grid">
+    
+    <div class="skill-category">
+      <h3>Game Development</h3>
+      <div class="skill-list">
+        <span>Unity Engine</span>
+        <span>Unreal Engine</span>
+        <span>Game Physics</span>
+        <span>Player Controllers</span>
+      </div>
+    </div>
+
+    <div class="skill-category">
+      <h3>Design</h3>
+      <div class="skill-list">
+        <span>2D/3D Game Design</span>
+        <span>Systems Design</span>
+        <span>Level Design</span>
+        <span>Game Balancing</span>
+        <span>Mechanics Design</span>
+        <span>Player Psychology</span>
+      </div>
+    </div>
+
+    <div class="skill-category">
+      <h3>Programming</h3>
+      <div class="skill-list">
+        <span>C++</span>
+        <span>C#</span>
+        <span>Python</span>
+        <span>JavaScript</span>
+        <span>Data Structures</span>
+        <span>Algorithms</span>
+      </div>
+    </div>
+
+    <div class="skill-category">
+      <h3>Tools</h3>
+      <div class="skill-list">
+        <span>Git/GitHub</span>
+        <span>Blender</span>
+        <span>Figma</span>
+        <span>Photoshop</span>
+        <span>Audacity</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about">
+  <h2>About Me</h2>
+  <div class="about-content">
+    <p>
+      I'm a Computer Science student specializing in Game Design. I enjoy creating games that focus on interesting mechanics and player experience.
+    </p>
+    <p>
+      My work ranges from board games to digital prototypes. I'm interested in how game systems interact and how small design choices affect player behavior.
+    </p>
+    <p>
+      Currently learning Unity, working on personal projects, and looking for opportunities to grow as a game designer.
+    </p>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" style="padding: 60px 0;">
+  <h2>Contact</h2>
+  <div class="about-content">
+    <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+      <a href="https://github.com/Romy4002" class="contact-link" title="GitHub" target="_blank" rel="noopener noreferrer">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+        GitHub
+      </a>
+      <a href="https://itch.io/profile/hauntinghero" class="contact-link" title="Itch.io" target="_blank" rel="noopener noreferrer">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 245.371 220.736">
+          <path d="M31.99 1.365C21.287 7.72.2 31.945 0 38.298v10.516C0 62.144 12.46 73.86 23.773 73.86c13.584 0 24.902-11.258 24.903-24.62 0 13.362 10.93 24.62 24.515 24.62 13.586 0 24.165-11.258 24.165-24.62 0 13.362 11.622 24.62 25.207 24.62h.246c13.586 0 25.208-11.258 25.208-24.62 0 13.362 10.58 24.62 24.164 24.62 13.585 0 24.515-11.258 24.515-24.62 0 13.362 11.32 24.62 24.903 24.62 11.313 0 23.773-11.714 23.773-25.046V38.298c-.2-6.354-21.287-30.58-31.988-36.933C180.118.197 157.056-.005 122.685 0c-34.37.003-81.228.54-90.697 1.365zm65.194 66.217a28.025 28.025 0 0 1-4.78 6.155c-5.128 5.014-12.157 8.122-19.906 8.122a28.482 28.482 0 0 1-19.948-8.126c-1.858-1.82-3.27-3.766-4.563-6.032l-.006.004c-1.292 2.27-3.092 4.215-4.954 6.037a28.5 28.5 0 0 1-19.948 8.12c-.934 0-1.906-.258-2.692-.528-1.092 11.372-1.553 22.24-1.716 30.164l-.002.045c-.02 4.024-.04 7.333-.06 11.93.21 23.86-2.363 77.334 10.52 90.473 19.964 4.655 56.7 6.775 93.555 6.788h.006c36.854-.013 73.59-2.133 93.554-6.788 12.883-13.14 10.31-66.614 10.52-90.474-.022-4.596-.04-7.905-.06-11.93l-.003-.045c-.162-7.926-.623-18.793-1.715-30.165-.786.27-1.757.528-2.692.528a28.5 28.5 0 0 1-19.948-8.12c-1.862-1.822-3.662-3.766-4.955-6.037l-.006-.004c-1.294 2.266-2.705 4.213-4.563 6.032a28.48 28.48 0 0 1-19.947 8.125c-7.748 0-14.778-3.11-19.906-8.123a28.025 28.025 0 0 1-4.78-6.155 27.99 27.99 0 0 1-4.736 6.155 28.49 28.49 0 0 1-19.95 8.124c-.27 0-.54-.012-.81-.02h-.007c-.27.008-.54.02-.813.02a28.49 28.49 0 0 1-19.95-8.123 27.992 27.992 0 0 1-4.736-6.155zm-20.486 26.49l-.002.01h.015c8.113.017 15.32 0 24.25 9.746 7.028-.737 14.372-1.105 21.722-1.094h.006c7.35-.01 14.694.357 21.723 1.094 8.93-9.747 16.137-9.73 24.25-9.746h.014l-.002-.01c3.833 0 19.166 0 29.85 30.007L210 165.244c8.504 30.624-2.723 31.373-16.727 31.4-20.768-.773-32.267-15.855-32.267-30.935-11.496 1.884-24.907 2.826-38.318 2.827h-.006c-13.412 0-26.823-.943-38.318-2.827 0 15.08-11.5 30.162-32.267 30.935-14.004-.027-25.23-.775-16.726-31.4L46.85 124.08C57.534 94.073 72.867 94.073 76.7 94.073z"/>
+        </svg>
+        Itch.io
+      </a>
+      <a href="mailto:ramneet626@gmail.com" class="contact-link" title="Email">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+        </svg>
+        Email
+      </a>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 Ramneet - Game Designer & Developer</p>
+</footer>
+
+<script>
+// Create animated particles
+const particlesContainer = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+  const particle = document.createElement('div');
+  particle.className = 'particle';
+  particle.style.left = Math.random() * 100 + '%';
+  particle.style.top = Math.random() * 100 + '%';
+  particle.style.width = (Math.random() * 100 + 50) + 'px';
+  particle.style.height = particle.style.width;
+  particle.style.animationDelay = Math.random() * 20 + 's';
+  particle.style.animationDuration = (Math.random() * 20 + 20) + 's';
+  particlesContainer.appendChild(particle);
+}
+
+// Scroll animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('section').forEach(section => {
+  observer.observe(section);
+});
+
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
